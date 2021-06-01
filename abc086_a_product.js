@@ -18,10 +18,12 @@ const main2 = () => {
   const a = process.argv[2];  // Nodeではコマンドライン引数をprocess.argv[index]で取得することができる。
   const b = process.argv[3];
 
-  if((a * b) % 2 === 0) {
+  if(((a * b) % 2 === 0) && (a * b)) {
     console.log('even');
-  } else {
+  } else if(((a * b) % 2 !== 0) && (a * b)) {
     console.log('odd');
+  } else {
+    console.log('コマンドライン引数に数値を入力してください。');
   }
 }
 
