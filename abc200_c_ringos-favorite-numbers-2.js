@@ -1,15 +1,16 @@
 const main = stdin => {
   const stdinArray = stdin.split('\n');
-  const N = parseInt(stdinArray[0], 10);
   const A = stdinArray[1].split(' ');
   const numbers = A.map(str => parseInt(str, 10));
 
   let count = 0;
-  for(let i = 0; i < numbers.length; i++) {
-    for(let j = i+1; j < numbers.length; j++) {
-      if((numbers[i] - numbers[j]) % 200 === 0) count++;
-    }
-  }
+  let obj = {};
+  numbers.forEach(number => {
+    number = +number % 200;
+    if(!obj[number]) obj[number] = 0;
+    count += obj[number];
+    obj[number]++;
+  })
 
   console.log('\n' + count);
 }
