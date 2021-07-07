@@ -1,3 +1,5 @@
+// https://atcoder.jp/contests/abc200/tasks
+
 const main = stdin => {
   const stdinArray = stdin.split('\n');
   const A = stdinArray[1].split(' ');
@@ -6,12 +8,13 @@ const main = stdin => {
   let count = 0;
   let obj = {};
   numbers.forEach(number => {
-    number = +number % 200;
+    number %= 200;
     if(!obj[number]) obj[number] = 0;
     count += obj[number];
     obj[number]++;
+    // console.log('\n' + count);
+    // console.log(obj[number]);
   })
-
   console.log('\n' + count);
 }
 
