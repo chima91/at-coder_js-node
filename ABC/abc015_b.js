@@ -5,10 +5,10 @@ const main = input => {
   const bugNumArr = input.split('\n')[1].split(' ').map(x => parseInt(x, 10));
 
   let sum = 0;
-  bugNumArr.forEach(item => {
-    if(item === 0) N--;
-    sum += item;
-  })
+  for(let value of bugNumArr) {
+    if(value === 0) N--;
+    sum += value;
+  }
 
   console.log(Math.ceil(sum / N));
 }
