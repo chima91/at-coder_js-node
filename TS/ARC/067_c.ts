@@ -2,40 +2,33 @@
 
 import { readFileSync } from "fs";
 
-const factorialize = (n: number): number => {
-  if(n === 0) return 1;
-  return n * factorialize(n-1);
-}
+const main = (num: number) => {
+  let obj: any = {};
 
-const primeFactorize = (num: number) => {
-  let arr = [];
+  for(let i = 2; i <= num; i++) {
+    let copyI = i;
+    for(let divisor = 2; divisor*divisor <= copyI; divisor++) {
+      if(copyI % divisor === 0) {
+        let expo = 0;
+        while(copyI % divisor === 0) {
+          expo++;
+          copyI /= divisor;
+        }
 
-  for(let i = 2; i*i <= num; i++) {
-    if(num % i !== 0) continue;
-
-    let ex = 0;
-    while(num % i === 0) {
-      ex++;
-      num /= i;
+        obj[divisor] ? obj[divisor]+=expo : obj[divisor]=expo;
+      }
     }
-    arr.push({
-      primeFactor: i,
-      exponent: ex
-    });
+
+    if(copyI !== 1) obj[copyI] ? obj[copyI]++ : obj[copyI]=1;
   }
 
-  if(num !== 1) arr.push({
-    primeFactor: num,
-    exponent: 1
-  })
-
-  let primeFactorNum = 1;
-  for(let j = 0; j < arr.length; j++) {
-    primeFactorNum *= arr[j].exponent + 1;
+  let answer = 1;
+  let mod = 1000000007;
+  for(let prop in obj) {
+    answer = (answer * (obj[prop]+1)) % mod;
   }
-  return primeFactorNum;
+  console.log(answer);
 }
 
 const N: number = parseInt(readFileSync(0, 'utf-8'));
-const divisorNum = primeFactorize(factorialize(N));
-console.log(divisorNum);
+main(N);
